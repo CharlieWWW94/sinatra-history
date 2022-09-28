@@ -1,0 +1,11 @@
+.headingDiv {
+  width: 100%;
+  background-color: white;
+  padding-top: 30px;
+}
+
+.subHeading {
+  position: relative;
+  top: -15px;
+  left: -1px;
+}

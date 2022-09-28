@@ -2,35 +2,43 @@ import { useState, useEffect } from "react";
 import Card from "../UI/Card";
 import HistoryBoxHeading from "./HistoryBoxHeading";
 import Button from "../UI/Button";
-
+import boxStyles from "./hBStyling/HistoryBox.module.css";
+import boxContentStyles from "./hBStyling/boxContentStyles.module.css";
 const HistoryBox = (props) => {
   const [historicalEvent, setHistoricalEvent] = useState("");
-  const [count, setCount] = useState(0)
-
+  const [count, setCount] = useState(0);
 
   const addCount = () => {
     setCount(() => {
       return count + 1;
-    })
-  }
+    });
+  };
 
   const getData = async () => {
     const response = await fetch("http://127.0.0.1:4567/");
     const data = await response.json();
     console.log(data);
     setHistoricalEvent(data);
-  }
+  };
 
-  useEffect(() => { 
+  useEffect(() => {
     getData();
   }, [count]);
 
   return (
-    <Card>
+    <Card addClassName={boxStyles.historycard}>
       <HistoryBoxHeading />
-      
-      {historicalEvent && <div><p>{historicalEvent.date}</p><p>{historicalEvent.fact}</p></div>}
-      <Button clickFunc = {addCount} message="Click here!" />
+      {historicalEvent && (
+        <div className={boxContentStyles.content}>
+          <div>
+          <p className={boxContentStyles.date}>{historicalEvent.date}</p>
+          </div>
+          <p className={boxContentStyles.fact}>{historicalEvent.fact}</p>
+        </div>
+      )}
+      <div>
+      <Button clickFunc={addCount} message="New Fact" />
+      </div>
     </Card>
   );
 };

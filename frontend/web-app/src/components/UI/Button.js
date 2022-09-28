@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-//removing form from button
+import buttonStyles from "./Button.module.css"
 const Button = (props) => {
   const prevDef = (event) => {
     event.preventDefault();
@@ -7,7 +7,7 @@ const Button = (props) => {
   };
 
   return (
-      <button onClick= {prevDef}>
+      <button className={buttonStyles.button} onClick= {prevDef}>
         {props.message}
       </button>
   );
