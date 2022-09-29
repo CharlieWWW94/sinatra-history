@@ -17,9 +17,9 @@ root.render(
   // </React.StrictMode>
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App><FactView/></App>}></Route>
-      <Route path="/explore" element={<App><ExploreView/></App>}></Route>
-      <Route path="/search" element={<App><SearchView/></App>}></Route>
+      <Route path="/" element={<App view={0}></App>}></Route>
+      <Route path="/explore" element={<App view={1}></App>}></Route>
+      <Route path="/search" element={<App view={2}></App>}></Route>
     </Routes>
   </BrowserRouter>
 );
