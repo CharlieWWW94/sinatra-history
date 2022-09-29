@@ -1,0 +1,6 @@
+.wrapper {
+    display: flex;
+    width: 33%;
+    flex-direction: column;
+
+}

@@ -4,10 +4,7 @@ import HistoryBoxHeading from "./HistoryBoxHeading";
 import Button from "../UI/Button";
 import boxStyles from "./hBStyling/HistoryBox.module.css";
 import boxContentStyles from "./hBStyling/boxContentStyles.module.css";
-
 const HistoryBox = (props) => {
-
-
   const [historicalEvent, setHistoricalEvent] = useState("");
   const [count, setCount] = useState(0);
 

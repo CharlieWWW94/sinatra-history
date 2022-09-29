@@ -1,0 +1,12 @@
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 40px;
+    color: white;
+}
+
+.main {
+    padding-bottom: 5px;
+    border-bottom: 3px solid coral;
+}
