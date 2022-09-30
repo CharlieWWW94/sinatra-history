@@ -14,7 +14,15 @@ const App = (props) => {
   const [historicalEvent, setHistoricalEvent] = useState("");
   const [count, setCount] = useState(0);
 
-  const addCount = () => {
+  const getSearchData = async (year) => {
+    const searchResponse = await fetch(`http://127.0.0.1:4567/${year}`);
+    const searchData = await searchResponse.json();
+    setHistoricalEvent(searchData);
+  };
+
+
+  const addCount = (event) => {
+    event.preventDefault()
     setCount(() => {
       return count + 1;
     });
@@ -23,7 +31,6 @@ const App = (props) => {
   const getData = async () => {
     const response = await fetch("http://127.0.0.1:4567/");
     const data = await response.json();
-    console.log(data);
     setHistoricalEvent(data);
   };
 
@@ -34,7 +41,7 @@ const App = (props) => {
   const views = {
     0: <FactView passClick={addCount} passFact={historicalEvent} />,
     1: <ExploreView wikiFact={historicalEvent}/>,
-    2: <SearchView />,
+    2: <SearchView passSubmit={getSearchData} />,
   };
 
   return (

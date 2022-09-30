@@ -51,6 +51,19 @@ require 'net/http'
         end
     end
 
+    def lookup_by_year(year)
+        conn = PG.connect(dbname: 'history')
+        conn.exec("SELECT * FROM world_history WHERE date LIKE '%#{year}%'") do |result|
+            result.each do |row|
+                puts "RESULT HERE: #{result}"
+                puts "ROW HERE: #{row}"
+                # return event_date = row.values_at("date", "description")
+                return event_date = row
+            end
+        end
+    end
+         
+
     get "/" do
         response["Access-Control-Allow-Origin"] = "*"
         to_display = database_lookup
@@ -59,4 +72,15 @@ require 'net/http'
         wiki = call_api(to_display[1])
         return {date: to_display[0], fact: to_display[1], wiki: wiki}.to_json
         
+    end
+
+    get "/:year" do
+        puts "HERE IS THE YEAR: #{params["year"]}"
+        response["Access-Control-Allow-Origin"] = "*"
+        to_display = lookup_by_year(params["year"])
+        to_display["description"].slice! "ampndash"
+        puts to_display["date"]
+        content_type :json
+        wiki = call_api(to_display["description"])
+        return {date: to_display["date"], fact: to_display["description"], wiki: wiki}.to_json
     end
